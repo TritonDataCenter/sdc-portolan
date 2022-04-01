@@ -5,7 +5,7 @@
 #
 
 #
-# Copyright (c) 2019, Joyent, Inc.
+# Copyright 2022 Joyent, Inc.
 #
 
 NAME:=portolan
@@ -17,8 +17,7 @@ RESTDOWN_FLAGS   = --brand-dir=deps/restdown-brand-remora
 
 JS_FILES	:= $(shell find lib test -name '*.js' | grep -v '/tmp/') \
 	bin/portolan
-JSL_CONF_NODE	 = tools/jsl.node.conf
-JSL_FILES_NODE	 = $(JS_FILES)
+ESLINT_FILES   = $(JS_FILES)
 JSSTYLE_FILES	 = $(JS_FILES)
 JSSTYLE_FLAGS	 = -f tools/jsstyle.conf
 ESLINT_FILES	 = $(JS_FILES)
@@ -44,15 +43,17 @@ CTF_TYPES=-t svp_req_t \
 TAPE=node_modules/.bin/tape
 
 ifeq ($(shell uname -s),SunOS)
-	NODE_PREBUILT_VERSION=v6.17.0
+	NODE_PREBUILT_VERSION=v6.17.1
 	NODE_PREBUILT_TAG=zone64
-	NODE_PREBUILT_IMAGE=c2c31b00-1d60-11e9-9a77-ff9f06554b0f
+	NODE_PREBUILT_IMAGE=a7199134-7e94-11ec-be67-db6f482136c2
 endif
 
 ENGBLD_USE_BUILDIMAGE	= true
 ENGBLD_REQUIRE		:= $(shell git submodule update --init deps/eng)
 include ./deps/eng/tools/mk/Makefile.defs
 TOP ?= $(error Unable to access eng.git submodule Makefiles.)
+
+BUILD_PLATFORM  = 20210826T002459Z
 
 ifeq ($(shell uname -s),SunOS)
 	include ./deps/eng/tools/mk/Makefile.node_prebuilt.defs
@@ -71,8 +72,8 @@ COMMIT=$(shell git describe --all --long  | awk -F'-g' '{print $$NF}')
 RELEASE_TARBALL:=$(NAME)-pkg-$(STAMP).tar.gz
 RELSTAGEDIR:=/tmp/$(NAME)-$(STAMP)
 
-# our base image is triton-origin-x86_64-18.4.0
-BASE_IMAGE_UUID = a9368831-958e-432d-a031-f8ce6768d190
+# our base image is triton-origin-x86_64-21.4.0
+BASE_IMAGE_UUID = 502eeef2-8267-489f-b19c-a206906f57ef
 BUILDIMAGE_NAME = $(NAME)
 BUILDIMAGE_DESC	= SDC Portolan Service
 AGENTS		= amon config registrar
