@@ -6,6 +6,7 @@
 
 #
 # Copyright 2022 Joyent, Inc.
+# Copyright 2022 MNX Cloud, Inc.
 #
 
 NAME:=portolan
@@ -75,7 +76,7 @@ RELSTAGEDIR:=/tmp/$(NAME)-$(STAMP)
 # our base image is triton-origin-x86_64-21.4.0
 BASE_IMAGE_UUID = 502eeef2-8267-489f-b19c-a206906f57ef
 BUILDIMAGE_NAME = $(NAME)
-BUILDIMAGE_DESC	= SDC Portolan Service
+BUILDIMAGE_DESC	= Triton Portolan Service
 AGENTS		= amon config registrar
 
 #
