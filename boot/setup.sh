@@ -8,6 +8,7 @@
 
 #
 # Copyright (c) 2015, Joyent, Inc.
+# Copyright 2022 MNX Cloud, Inc.
 #
 
 export PS4='[\D{%FT%TZ}] ${BASH_SOURCE}:${LINENO}: ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
@@ -26,7 +27,7 @@ sdc_common_setup
 
 # Add build/node/bin and node_modules/.bin to PATH
 echo "" >>/root/.profile
-echo "export PATH=\$PATH:/opt/smartdc/$role/node/bin:/opt/smartdc/$role/node_modules/.bin:/opt/smartdc/$role/bin" >>/root/.profile
+echo "export PATH=\$PATH:/opt/smartdc/$role/build/node/bin:/opt/smartdc/$role/node_modules/.bin:/opt/smartdc/$role/bin" >>/root/.profile
 
 # Log rotation.
 sdc_log_rotation_add amon-agent /var/svc/log/*amon-agent*.log 1g
